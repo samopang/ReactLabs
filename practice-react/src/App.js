@@ -16,8 +16,12 @@ class App extends Component {
   }
 
   render() {
+    let slider = this.state.visible ? <ImageSlider /> : <Counter initialCount={0} />
+    // if we need to totally change something (put on the top of the render function)
+    if (!this.state.visible) { // after executed it others won't be ran
+      slider = <div>display nothing</div>
+    }
     const buttonText = this.state.visible ? 'hide' : 'show'
-    const slider = this.state.visible ? <ImageSlider /> : <Counter initialCount={0} />
     return (
       <div className="App">
         { slider }
