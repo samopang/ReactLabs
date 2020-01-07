@@ -9,6 +9,7 @@ class Header extends Component {
   render() {
     return (
         <div className="header">
+          <h2>in Header Component</h2>
 
           {/* pass data through 'props' by JS variable 'title' */}
           The passing string data is {this.props.title}
@@ -35,17 +36,14 @@ class Header extends Component {
 
 /**
  * functional component
- * with little different syntax
+ * pass data by 'props' need to pass in as a param without 'this' keyword
  */
-const Body = () => (
-  <div className="body">here is body</div>
+const Body = (props) => (
+  <div className="body">
+    <h2>in Body Functional Component</h2>
+    {props.text}
+  </div>
 );
-// same as
-const Body = () => {
-  return (
-    <div className="body">here is body</div>
-  )
-};
 
 /**
  * Root Component
@@ -83,7 +81,7 @@ class App extends Component {
           myFunc3={this.multiplication}
           />
         
-        <Body />
+        <Body text="Data from App" />
 
         <div className="footer">here is footer</div>
       </div>
