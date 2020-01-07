@@ -34,6 +34,20 @@ class Header extends Component {
 }
 
 /**
+ * functional component
+ * with little different syntax
+ */
+const Body = () => (
+  <div className="body">here is body</div>
+);
+// same as
+const Body = () => {
+  return (
+    <div className="body">here is body</div>
+  )
+};
+
+/**
  * Root Component
  * with render() function
  */
@@ -69,7 +83,8 @@ class App extends Component {
           myFunc3={this.multiplication}
           />
         
-        <div className="body">here is body</div>
+        <Body />
+
         <div className="footer">here is footer</div>
       </div>
     );
