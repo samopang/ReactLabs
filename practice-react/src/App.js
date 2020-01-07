@@ -4,10 +4,25 @@ import ImageSlider from './components/ImageSlider';
 
 class App extends Component {
 
+  state = {
+    visible: true
+  }
+
+  handleToggleImage = () => {
+    this.setState({
+      visible: !this.state.visible
+    })
+  }
+
   render() {
+    const buttonText = this.state.visible ? 'hide' : 'show'
     return (
       <div className="App">
-        <ImageSlider />
+        {/* conditionally render a component */}
+        {this.state.visible ? <ImageSlider /> : <div>image is hidden</div>}
+        <button onClick={this.handleToggleImage}>
+          { buttonText }
+        </button>
       </div>
     );
   }
