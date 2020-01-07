@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header'
-import Body from './components/Body'
+import Body, { Body2 } from './components/Body'
 
 class App extends Component {
 
@@ -26,6 +26,7 @@ class App extends Component {
           myFunc3={this.multiplication}
         />
         <Body text="data from App" />
+        <Body2 />
       </div>
     );
   }
