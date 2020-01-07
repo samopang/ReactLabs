@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header'
 import Body, { Body2 } from './components/Body'
+import Counter from './components/Counter'
 
 class App extends Component {
 
@@ -27,6 +28,8 @@ class App extends Component {
         />
         <Body text="data from App" />
         <Body2 />
+        <Counter initialCount={5} />
+        <Counter initialCount={100} />
       </div>
     );
   }
