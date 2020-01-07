@@ -81,7 +81,9 @@ class App extends Component {
           myFunc3={this.multiplication}
           />
         
+        {/* pass the same component with different data */}
         <Body text="Data from App" />
+        <Body text="new Data from App" />
 
         <div className="footer">here is footer</div>
       </div>
