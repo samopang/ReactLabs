@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Counter from './components/Counter';
 import ImageSlider from './components/ImageSlider';
 
 class App extends Component {
@@ -16,10 +17,10 @@ class App extends Component {
 
   render() {
     const buttonText = this.state.visible ? 'hide' : 'show'
+    const slider = this.state.visible ? <ImageSlider /> : <Counter initialCount={0} />
     return (
       <div className="App">
-        {/* conditionally render a component */}
-        {this.state.visible ? <ImageSlider /> : <div>image is hidden</div>}
+        { slider }
         <button onClick={this.handleToggleImage}>
           { buttonText }
         </button>
