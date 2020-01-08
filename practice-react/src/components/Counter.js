@@ -2,40 +2,11 @@ import React from 'react'
 
 export default class Counter extends React.Component {
 
-  // in React component life cycle:
-  // render() -> mount() -> unmount() -> render() -> mount() ..
-  componentWillUnmount() {
-    console.log('unmounting..')
-  }
-  componentDidMount() {
-    console.log('mounting..')
+  state = {
+    count: 0
   }
 
-  constructor(props) {
-    // using 'constructor' 
-    // need to add 'super' using 'props'
-    super(props)
-
-    // using 'state'
-    // only in ClassComponent, FunctionalComponent hasn't
-    // can be defined outside 'constructor'
-    // in 'constructor' for using initial 'props' values
-    this.state = {
-      count: 0
-      // count: props.initialCount
-    }
-  }
-
-
-  // with this syntax can be easy to binding event/state
   handleIncrementBtn = () => {
-    // console.log('button clicked') // test
-    // console.log(this)
-    // console.log(this.state)
-
-    // bad practice (mutating way)
-    // this.state.count += 1
-    // best practice (pass as a new state)
     this.setState({
       count: this.state.count + 1
     })
@@ -47,9 +18,6 @@ export default class Counter extends React.Component {
   }
 
   render() {
-    // after called function while re-render
-    console.log('render function called')
-
     return (
       <div>
         <h2>in Counter Component</h2>
