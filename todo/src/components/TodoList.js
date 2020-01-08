@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
+import TodoForm from './TodoForm'
 
 /**
  * Todo MVC
@@ -13,11 +14,25 @@ import React, { Component } from 'react'
  * 8. button to toggle all on/off
  */
 
-export default class TodoList extends Component {
+export default class TodoList extends React.Component {
+
+  state = {
+    tasks: []
+  }
+
+  addTask = task => {
+    this.setState({
+      tasks: [task, ...this.state.tasks] // copy origin array to avoid .push() mutate the array
+    })
+  }
+
   render() {
     return (
       <div>
-        todos..
+        <TodoForm
+          onSubmit={this.addTask} 
+        />
+        {JSON.stringify(this.state.tasks)}
       </div>
     )
   }
