@@ -9,43 +9,56 @@ export default class MyForm extends React.Component {
     title: 'Mr.'
   }
 
-  handleChange = (e, fieldName, isCheckbox) => {
+  handleChange = (e) => {
+    // console.log(e.target.name) // fetch field's name value
+
+    // optimize checkbox condition from param to here
+    const isCheckbox = e.target.type === 'checkbox'
+
     this.setState({
       // change the value of the name not the name of property itself
-      [fieldName]: // condition: either checkbox or not
+      [e.target.name]: // condition: either checkbox or not
         isCheckbox ? // default 'null' as false
         e.target.checked : e.target.value
     })
   }
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    // to prevent putting data on url and refresh the page
+    e.preventDefault();
     console.log(this.state)
   }
 
   render() {
     return (
-      <div>
+      // form submit always refreshing the page
+      // put data on url
+      <form onSubmit={this.handleSubmit}>
         <input 
           type="text" 
-          onChange={ (e) => this.handleChange(e, 'name') } 
+          name="name"
+          onChange={this.handleChange} 
           value={this.state.name}
         /><br />
 
         <textarea 
           type="text" 
-          onChange={ (e) => this.handleChange(e, 'favoritePet') } 
+          name="favoritePet"
+          onChange={this.handleChange} 
           value={this.state.favoritePet}
         /><br />
 
         <input 
           type="checkbox"
+          name="rememberMe"
           checked={this.state.rememberMe} 
-          onChange={ (e) => this.handleChange(e, 'rememberMe', true) }
+          onChange={this.handleChange}
         /><br />
 
         <div>
           <select 
+            name="title"
             value={this.state.title}
-            onChange={ (e) => this.handleChange(e, 'title') }
+            onChange={this.handleChange}
           >
             <option>Mr.</option>
             <option>Miss.</option>
@@ -54,8 +67,8 @@ export default class MyForm extends React.Component {
           </select>
         </div>
 
-        <button onClick={this.handleSubmit}>submit</button>
-      </div>
+        <button type="submit">submit</button>
+      </form>
     )
   }
 }
