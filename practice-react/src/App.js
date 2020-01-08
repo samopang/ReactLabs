@@ -7,7 +7,7 @@ class App extends Component {
 
   state = {
     visible: true,
-    componentToShow: 'slider'
+    componentToShow: 'counter'
   }
 
   handleToggleBtn = () => {
@@ -52,7 +52,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        {content}
+
+        {/* hidden component to avoid unmounting it */}
+        <div className={this.state.visible ? 'visible' : 'hidden'}>
+          <Counter />
+        </div>
+
         <button onClick={this.handleToggleBtn}>{buttonText}</button>
       </div>
     );

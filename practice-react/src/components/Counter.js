@@ -2,6 +2,15 @@ import React from 'react'
 
 export default class Counter extends React.Component {
 
+  // in React component life cycle:
+  // render() -> mount() -> unmount() -> render() -> mount() ..
+  componentWillUnmount() {
+    console.log('unmounting..')
+  }
+  componentDidMount() {
+    console.log('mounting..')
+  }
+
   constructor(props) {
     // using 'constructor' 
     // need to add 'super' using 'props'
@@ -12,8 +21,8 @@ export default class Counter extends React.Component {
     // can be defined outside 'constructor'
     // in 'constructor' for using initial 'props' values
     this.state = {
-      // count: 0
-      count: props.initialCount
+      count: 0
+      // count: props.initialCount
     }
   }
 
