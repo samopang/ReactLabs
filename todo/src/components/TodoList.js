@@ -32,7 +32,12 @@ export default class TodoList extends React.Component {
         <TodoForm
           onSubmit={this.addTask} 
         />
-        {JSON.stringify(this.state.tasks)}
+        {/* list tasks */}
+        {this.state.tasks.map(data => (
+          <div key={data.id}>
+            {data.task}
+          </div>
+        ))}
       </div>
     )
   }

@@ -4,7 +4,7 @@ import shortid from 'shortid'
 export default class TodoForm extends React.Component {
 
   state = {
-    task: ''
+    text: ''
   }
 
   handleChange = (e) => {
@@ -16,11 +16,11 @@ export default class TodoForm extends React.Component {
     e.preventDefault()
     this.props.onSubmit({
       id: shortid.generate(), // generate a short unique id
-      task: this.state.task,
+      task: this.state.text,
       isCompleted: false
     })
     this.setState({ // empty input field
-      task: ''
+      text: ''
     })
   }
 
@@ -29,9 +29,9 @@ export default class TodoForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <input 
           type="text"
-          name="task"
+          name="text"
           placeholder="new task.."
-          value={this.state.task}
+          value={this.state.text}
           onChange={this.handleChange}
         />
         <button type="submit">Add Task</button>
