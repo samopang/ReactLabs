@@ -9,26 +9,12 @@ export default class MyForm extends React.Component {
     title: 'Mr.'
   }
 
-  handleChange = (e) => {
-    // console.log('changed') // test
-    // console.log(e.target.value)
+  handleChange = (e, fieldName, isCheckbox) => {
     this.setState({
-      name: e.target.value
-    })
-  }
-  handleChangeFavoritePet = (e) => {
-    this.setState({
-      favoritePet: e.target.value
-    })
-  }
-  handleCheck= (e) => {
-    this.setState({
-      rememberMe: e.target.checked
-    })
-  }
-  handleSelect = (e) => {
-    this.setState({
-      title: e.target.value
+      // change the value of the name not the name of property itself
+      [fieldName]: // condition: either checkbox or not
+        isCheckbox ? // default 'null' as false
+        e.target.checked : e.target.value
     })
   }
   handleSubmit = () => {
@@ -38,31 +24,28 @@ export default class MyForm extends React.Component {
   render() {
     return (
       <div>
-        {/* uncontrol field */}
-        {/* <input type="text"/> */}
-        
         <input 
           type="text" 
-          onChange={this.handleChange} 
+          onChange={ (e) => this.handleChange(e, 'name') } 
           value={this.state.name}
         /><br />
 
         <textarea 
           type="text" 
-          onChange={this.handleChangeFavoritePet} 
+          onChange={ (e) => this.handleChange(e, 'favoritePet') } 
           value={this.state.favoritePet}
         /><br />
 
         <input 
           type="checkbox"
           checked={this.state.rememberMe} 
-          onChange={this.handleCheck}
+          onChange={ (e) => this.handleChange(e, 'rememberMe', true) }
         /><br />
 
         <div>
           <select 
             value={this.state.title}
-            onChange={this.handleSelect}
+            onChange={ (e) => this.handleChange(e, 'title') }
           >
             <option>Mr.</option>
             <option>Miss.</option>
