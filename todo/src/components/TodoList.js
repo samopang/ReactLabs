@@ -18,7 +18,8 @@ import Todo from './Todo'
 export default class TodoList extends React.Component {
 
   state = {
-    tasks: []
+    tasks: [],
+    show: 'all'
   }
 
   addTask = task => {
@@ -41,11 +42,27 @@ export default class TodoList extends React.Component {
       })
     })
   }
+  handleFilter = (e) => {
+    this.setState({
+      show: e.target.textContent
+    })
+  }
 
   render() {
+    let tasks = []
+
+    if (this.state.show === 'all') {
+      tasks = this.state.tasks
+    }
+    if (this.state.show === 'active') {
+      tasks = this.state.tasks.filter(task => !task.isCompleted)
+    }
+    if (this.state.show === 'completed') {
+      tasks = this.state.tasks.filter(task => task.isCompleted)
+    }
+
     return (
       <div>
-
         <TodoForm
           onSubmit={this.addTask} 
         />
@@ -56,8 +73,15 @@ export default class TodoList extends React.Component {
           {this.state.tasks.filter(task => !task.isCompleted).length}
         </div>
 
+        {/* filter list */}
+        <div>
+          <button onClick={this.handleFilter}>all</button>
+          <button onClick={this.handleFilter}>active</button>
+          <button onClick={this.handleFilter}>completed</button>
+        </div>
+
         {/* list tasks */}
-        {this.state.tasks.map(task => (
+        {tasks.map(task => ( // list tasks based on filter condition (default: ALL)
           <Todo 
             key={task.id} 
             todo={task}
