@@ -6,7 +6,7 @@ import Todo from './Todo'
  * Todo MVC
  * 1. add a new task
  * 2. display all tasks
- * 3. cross ofd task ?
+ * 3. cross off task ?
  * 4. show number of active tasks
  * 5. filter all / active / complete
  * 6. delete an existing task
@@ -27,16 +27,39 @@ export default class TodoList extends React.Component {
     })
   }
 
+  handleComplete = (id) => {
+    this.setState({
+      tasks: this.state.tasks.map(task => {
+        // suppose to update
+        if (task.id === id) {
+          return {
+            ...task, // keep rest data only override changes
+            isCompleted: !task.isCompleted
+          }
+        }
+        return task
+      })
+    })
+  }
+
   render() {
     return (
       <div>
+        
         <TodoForm
           onSubmit={this.addTask} 
         />
+
         {/* list tasks */}
-        {this.state.tasks.map(data => (
-          <Todo key={data.id} task={data.task} />
+        {this.state.tasks.map(task => (
+          <Todo 
+            key={task.id} 
+            todo={task}
+            toggleComplete={() => this.handleComplete(task.id)}
+          />
         ))}
+        
+        {/* {JSON.stringify(this.state.tasks)} */}
       </div>
     )
   }
