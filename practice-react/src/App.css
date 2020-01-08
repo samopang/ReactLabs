@@ -43,3 +43,6 @@
 .visible {
   background-color: #fcfcfc;
 }
+.danger {
+  color: red;
+}
