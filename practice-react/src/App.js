@@ -6,28 +6,54 @@ import ImageSlider from './components/ImageSlider';
 class App extends Component {
 
   state = {
-    visible: true
+    visible: true,
+    componentToShow: 'slider'
   }
 
-  handleToggleImage = () => {
+  handleToggleBtn = () => {
     this.setState({
       visible: !this.state.visible
     })
   }
+  showCounter = () => {
+    this.setState({
+      componentToShow: 'counter'
+    })
+  }
+  showSlider = () => {
+    this.setState({
+      componentToShow: 'slider'
+    })
+  }
 
   render() {
-    let slider = this.state.visible ? <ImageSlider /> : <Counter initialCount={0} />
-    // if we need to totally change something (put on the top of the render function)
-    if (!this.state.visible) { // after executed it others won't be ran
-      slider = <div>display nothing</div>
-    }
+    let content = 'choose what to show here'
     const buttonText = this.state.visible ? 'hide' : 'show'
+
+    if (this.state.componentToShow === 'slider') {
+      content = 
+        <div>
+          <ImageSlider />
+          <button onClick={this.showCounter}>show counter</button>
+        </div>
+    }
+
+    if (this.state.componentToShow === 'counter') {
+      content = 
+        <div>
+          <Counter initialCount={0} />
+          <button onClick={this.showSlider}>show slider</button>
+        </div>
+    }
+    
+    if (!this.state.visible) {
+      content = 'hide everything'
+    }
+
     return (
       <div className="App">
-        { slider }
-        <button onClick={this.handleToggleImage}>
-          { buttonText }
-        </button>
+        {content}
+        <button onClick={this.handleToggleBtn}>{buttonText}</button>
       </div>
     );
   }
