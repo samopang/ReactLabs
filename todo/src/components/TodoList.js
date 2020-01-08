@@ -1,5 +1,6 @@
 import React from 'react'
 import TodoForm from './TodoForm'
+import Todo from './Todo'
 
 /**
  * Todo MVC
@@ -34,9 +35,7 @@ export default class TodoList extends React.Component {
         />
         {/* list tasks */}
         {this.state.tasks.map(data => (
-          <div key={data.id}>
-            {data.task}
-          </div>
+          <Todo key={data.id} task={data.task} />
         ))}
       </div>
     )
