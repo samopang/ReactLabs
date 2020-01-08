@@ -6,7 +6,7 @@ import Todo from './Todo'
  * Todo MVC
  * 1. add a new task
  * 2. display all tasks
- * 3. cross off task ?
+ * 3. cross off task
  * 4. show number of active tasks
  * 5. filter all / active / complete
  * 6. delete an existing task
@@ -45,10 +45,16 @@ export default class TodoList extends React.Component {
   render() {
     return (
       <div>
-        
+
         <TodoForm
           onSubmit={this.addTask} 
         />
+
+        {/* observe the number of uncompleted tasks */}
+        <div>
+          Todo left: 
+          {this.state.tasks.filter(task => !task.isCompleted).length}
+        </div>
 
         {/* list tasks */}
         {this.state.tasks.map(task => (
