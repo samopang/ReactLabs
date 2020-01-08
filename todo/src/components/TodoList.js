@@ -47,6 +47,11 @@ export default class TodoList extends React.Component {
       show: e.target.textContent
     })
   }
+  handleDelete = (id) => { // permanently remove
+    this.setState({
+      tasks: this.state.tasks.filter(task => task.id !== id)
+    })
+  }
 
   render() {
     let tasks = []
@@ -86,6 +91,7 @@ export default class TodoList extends React.Component {
             key={task.id} 
             todo={task}
             toggleComplete={() => this.handleComplete(task.id)}
+            onDelete={() => this.handleDelete(task.id)}
           />
         ))}
         

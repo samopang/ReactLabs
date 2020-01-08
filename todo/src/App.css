@@ -41,3 +41,10 @@
   text-decoration: line-through;
   color: gray;
 }
+.container {
+  display: flex;
+  justify-content: center;
+}
+.container button {
+  margin-left: 10px;
+}
