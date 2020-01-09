@@ -52,6 +52,11 @@ export default class TodoList extends React.Component {
       tasks: this.state.tasks.filter(task => task.id !== id)
     })
   }
+  removeAllCompleted = () => {
+    this.setState({
+      tasks: this.state.tasks.filter(task => !task.isCompleted)
+    })
+  }
 
   render() {
     let tasks = []
@@ -84,6 +89,14 @@ export default class TodoList extends React.Component {
           <button onClick={this.handleFilter}>active</button>
           <button onClick={this.handleFilter}>completed</button>
         </div>
+
+        {/* clear all completed tasks */}
+        { // some() for at least one task there
+          this.state.tasks.some(task => task.isCompleted) ? (
+            <button onClick={this.removeAllCompleted}>Clear</button>
+          ) : null          
+        }
+        
 
         {/* list tasks */}
         {tasks.map(task => ( // list tasks based on filter condition (default: ALL)
