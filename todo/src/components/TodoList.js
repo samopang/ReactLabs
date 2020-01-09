@@ -59,15 +59,15 @@ export default class TodoList extends React.Component {
     })
   }
   handleToggleAllComplete = () => {
-    console.log('btn clicked')
-    this.setState({
-      tasks: this.state.tasks.map(task => ({ // parentheses cover curly-braces
+    // best practice setState() by callback function with 'state' param
+    // setState() is asynchronous, sometime 'this.state' will case issues
+    this.setState(state => ({ // parentheses cover curly-braces
+      tasks: state.tasks.map(task => ({ // parentheses cover curly-braces
         ...task,
-        isCompleted: this.state.toggleAllComplete
+        isCompleted: state.toggleAllComplete
       })),
-      toggleAllComplete: !this.state.toggleAllComplete
-    })
-    console.log('after switched')
+      toggleAllComplete: !state.toggleAllComplete
+    }))
   }
 
   render() {
