@@ -19,7 +19,8 @@ export default class TodoList extends React.Component {
 
   state = {
     tasks: [],
-    show: 'all'
+    show: 'all',
+    toggleAllComplete: true
   }
 
   addTask = task => {
@@ -56,6 +57,17 @@ export default class TodoList extends React.Component {
     this.setState({
       tasks: this.state.tasks.filter(task => !task.isCompleted)
     })
+  }
+  handleToggleAllComplete = () => {
+    console.log('btn clicked')
+    this.setState({
+      tasks: this.state.tasks.map(task => ({ // parentheses cover curly-braces
+        ...task,
+        isCompleted: this.state.toggleAllComplete
+      })),
+      toggleAllComplete: !this.state.toggleAllComplete
+    })
+    console.log('after switched')
   }
 
   render() {
@@ -95,6 +107,15 @@ export default class TodoList extends React.Component {
           this.state.tasks.some(task => task.isCompleted) ? (
             <button onClick={this.removeAllCompleted}>Clear</button>
           ) : null          
+        }
+        
+        {/* on/off all complete or not */}
+        {
+          this.state.tasks.length ? (
+            <button onClick={this.handleToggleAllComplete}>
+              All {this.state.toggleAllComplete ? ' COMPLETE' : ' ACTIVE'}
+            </button>
+          ) : null
         }
         
 
