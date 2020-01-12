@@ -4,19 +4,12 @@ import '../assets/css/weather-icons.min.css'
 import ListItemWrapper, { WeatherIcon } from './styles/ListItemWrapper'
 require('dotenv').config()
 
+const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
 export default class WeatherForecast extends React.Component {
 
   state = {
     weather: [],
-    weekday: [
-      'Sunday', 
-      'Monday', 
-      'Tuesday', 
-      'Wednesday', 
-      'Thursday', 
-      'Friday', 
-      'Saturday'
-    ],
     isLoading: true
   }
   componentDidMount() {
@@ -49,7 +42,7 @@ export default class WeatherForecast extends React.Component {
               {/* weekday */}
               <div>
                 {
-                  this.state.weekday[new Date(data.dt_txt).getDay()]
+                  weekday[new Date(data.dt_txt).getDay()]
                 }
               </div>
               <div>Date: {data.dt_txt}</div>
