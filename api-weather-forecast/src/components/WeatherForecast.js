@@ -17,7 +17,6 @@ export default class WeatherForecast extends React.Component {
       'Friday', 
       'Saturday'
     ],
-    prefix: ['wi wi-day-', 'wi wi-night-'],
     isLoading: true
   }
   componentDidMount() {
@@ -58,10 +57,10 @@ export default class WeatherForecast extends React.Component {
               {/* weather icon */}
               <div>
                 {
-                  (new Date(data.dt_txt).getHours() > 6 && new Date(data.dt_txt).getHours() < 20) ? (
-                    <WeatherIcon className={this.state.prefix[0] + data.weather[0].main.toLowerCase()}></WeatherIcon>
+                  (data.weather[0].main === 'Clouds') ? (
+                    <WeatherIcon className="wi wi-cloudy"></WeatherIcon>
                   ) : (
-                    <WeatherIcon className={this.state.prefix[1] + data.weather[0].main.toLowerCase()}></WeatherIcon>
+                    <WeatherIcon className={'wi wi-' + data.weather[0].main.toLowerCase()}></WeatherIcon>
                   )
                 }
               </div>
