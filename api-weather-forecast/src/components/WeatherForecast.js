@@ -10,27 +10,40 @@ export default class WeatherForecast extends React.Component {
 
   state = {
     weather: [],
-    isLoading: true
+    isLoading: true,
+    error: ''
   }
+
   componentDidMount() {
-    
     const url = 
       'https://api.openweathermap.org/data/2.5/forecast?q=' 
       + this.props.city 
       + '&units=metric&appid=' 
       + process.env.REACT_APP_KEY
+    
     Axios.get(url)
       .then(res => {
-        this.setState({
-          weather: res.data.list,
-          isLoading: false
-        })
+        // console.log(res.status)        
+        if (res.status === 200) {
+          this.setState({
+            weather: res.data.list,
+            isLoading: false
+          })
+        }
       })
-      .catch(err => console.log(err.message)) 
+      .catch(err => {
+        console.log(err.message)
+        this.setState({
+          error: 'Not Found.'
+        })
+      }) 
   }
   
   render() {
     // console.log(this.state.weather)
+    if (this.state.error) {
+      return <div>{this.state.error}</div>
+    }
     if (this.state.isLoading) {
       return <div>loading ...</div>
     }
